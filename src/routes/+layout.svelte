@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Footer from '$lib/Footer.svelte';
 	import Nav from '$lib/Nav.svelte';
+	import { page } from '$app/stores';
 	import '../app.css';
 
 	let { children } = $props();

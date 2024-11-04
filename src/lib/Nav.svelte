@@ -16,7 +16,7 @@
 		<div>
 			<a
 				href="/about"
-				class="p-2 text-2xl hover:opacity-75 {$page.url.pathname === '/about'
+				class="p-4 text-2xl hover:opacity-75 {$page.url.pathname === '/about'
 					? 'border-b-2 border-black'
 					: ''}"
 				aria-label="About"
@@ -25,7 +25,7 @@
 			</a>
 			<a
 				href="/faq"
-				class="p-2 text-2xl hover:opacity-75 {$page.url.pathname === '/faq'
+				class="p-4 text-2xl hover:opacity-75 {$page.url.pathname === '/faq'
 					? 'border-b-2 border-black'
 					: ''}"
 				aria-label="Frequently asked questions"

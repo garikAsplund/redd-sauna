@@ -26,6 +26,10 @@
 
 <svelte:window bind:scrollY />
 
+<svelte:head>
+	<title>Redd Sauna | Home</title>
+</svelte:head>
+
 <div class="relative h-screen w-full">
 	<enhanced:img
 		src="/static/redd-bg.jpeg"

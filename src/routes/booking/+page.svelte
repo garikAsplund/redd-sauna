@@ -2,6 +2,10 @@
 	import BookingForm from "$lib/BookingForm.svelte";
 </script>
 
+<svelte:head>
+	<title>Redd Sauna | Booking</title>
+</svelte:head>
+
 <section class="w-full px-8 pt-64 flex justify-center">
 	<iframe
 		scrolling="no"
