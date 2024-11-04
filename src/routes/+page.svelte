@@ -38,7 +38,7 @@
 	/>
 	<div class="absolute inset-0 z-20 bg-black/20"></div>
 	<div
-		class="absolute inset-0 z-30 flex flex-col items-center justify-center space-y-8 font-bold text-white"
+		class="absolute inset-0 z-30 flex flex-col items-center justify-center space-y-16 translate-y-8 font-bold text-white"
 		style="opacity: {1 - scrollY / 300}"
 	>
 		<h1 class="text-center text-6xl">Keep your fire burning</h1>
