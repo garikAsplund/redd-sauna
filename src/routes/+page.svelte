@@ -58,7 +58,7 @@
 
 <div class="mb-8 flex w-full justify-center">
 	<section class="h-full w-[80%]">
-		<div class="my-32 flex flex-col items-center justify-center space-y-12">
+		<div class="my-32 flex flex-col items-center justify-center space-y-12 text-center">
 			<p class="text-4xl font-bold">…a cozy and invigorating sauna right outside your door.</p>
 			<p class="text-2xl font-thin">
 				We can bring our mobile sauna anywhere in Wallowa County (as long as there are roads).
