@@ -43,7 +43,7 @@
 		<div class="flex items-center">
 			<a
 				href="/booking"
-				class="mx-4 p-2 px-4 text-2xl hover:!opacity-75 border-2  {$page.url.pathname === '/'
+				class="mx-4 p-2 px-4 text-2xl hover:!opacity-75 border-2 {scrollY < 10 && $page.url.pathname === '/' ? 'invisible' : ''} {$page.url.pathname === '/'
 					? 'border-white'
 					: 'border-[#d33e27]'}"
 				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
