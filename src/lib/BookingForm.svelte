@@ -3,7 +3,6 @@
 	import { superForm } from 'sveltekit-superforms';
 	import { z } from 'zod';
 
-	// Define the Zod schema for validation
 	const schema = z.object({
 		firstName: z.string().min(1, 'First Name is required'),
 		lastName: z.string().min(1, 'Last Name is required'),
@@ -49,7 +48,6 @@
 		}
 	};
 
-	// Initialize superForm with the schema
 	const { form } = superForm(data.form, { schema, dataType: 'json' });
 
 	const isFormValid = $derived(
@@ -68,164 +66,285 @@
 
 <section
 	class="mx-auto my-8 flex w-full max-w-2xl flex-col items-center rounded-lg bg-gray-50 p-4 py-8 shadow-lg"
+	aria-labelledby="booking-form-title"
 >
-	<h2 class="mb-6 text-2xl font-semibold text-gray-700">Booking Form</h2>
+	<h1 id="booking-form-title" class="mb-6 text-2xl font-semibold text-gray-700">Booking Form</h1>
 
-	<form method="POST" use:enhance class="w-full space-y-4">
-		<!-- Name fields -->
-		<h3 class="text-lg font-semibold text-gray-700">Contact Info</h3>
-
-		<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-			<div>
-				<label for="firstName" class="block text-sm font-medium text-gray-600">First Name *</label>
-				<input
-					type="text"
-					name="firstName"
-					bind:value={$form.firstName}
-					class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-				/>
-			</div>
-			<div>
-				<label for="lastName" class="block text-sm font-medium text-gray-600">Last Name *</label>
-				<input
-					type="text"
-					name="lastName"
-					bind:value={$form.lastName}
-					class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-				/>
-			</div>
-		</div>
-
-		<!-- Contact Info -->
-		<div>
-			<label for="email" class="block text-sm font-medium text-gray-600">Email Address *</label>
-			<input
-				type="email"
-				name="email"
-				bind:value={$form.email}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			/>
-		</div>
-		<div>
-			<label for="phoneNumber" class="block text-sm font-medium text-gray-600">Phone Number *</label
-			>
-			<input
-				type="tel"
-				name="phoneNumber"
-				bind:value={$form.phoneNumber}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			/>
-		</div>
-
-		<!-- Contact Method -->
-		<div>
-			<label for="preferredContactMethod" class="block text-sm font-medium text-gray-600"
-				>Preferred Contact Method *</label
-			>
-			<select
-				name="preferredContactMethod"
-				bind:value={$form.preferredContactMethod}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			>
-				<option value="">Select an option</option>
-				<option value="email">Email</option>
-				<option value="call">Call</option>
-				<option value="text">Text</option>
-			</select>
-		</div>
-
-		<!-- Delivery Address -->
-		<div class="mt-4">
-			<h3 class="text-lg font-semibold text-gray-700">Delivery Address</h3>
-			<div class="mt-2 grid grid-cols-1 gap-4">
+	<form 
+		method="POST" 
+		use:enhance 
+		class="w-full space-y-4"
+		aria-label="Reservation booking form"
+		novalidate
+	>
+		<!-- Personal Information Section -->
+		<div role="region" aria-labelledby="personal-info-title">
+			<h2 id="personal-info-title" class="mb-4 text-lg font-semibold text-gray-700">Personal Information</h2>
+			
+			<div class="grid grid-cols-1 gap-4">
 				<div>
-					<label for="addressLine1" class="block text-sm font-medium text-gray-600"
-						>Address Line 1 *</label
-					>
+					<label for="firstName" class="block text-sm font-medium text-gray-600">
+						First Name <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
 					<input
 						type="text"
+						id="firstName"
+						name="firstName"
+						bind:value={$form.firstName}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="given-name"
+					/>
+				</div>
+				<div>
+					<label for="lastName" class="block text-sm font-medium text-gray-600">
+						Last Name <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="text"
+						id="lastName"
+						name="lastName"
+						bind:value={$form.lastName}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="family-name"
+					/>
+				</div>
+			</div>
+		</div>
+
+		<!-- Contact Information Section -->
+		<div role="region" aria-labelledby="contact-info-title">
+			<h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">Contact Information</h2>
+			
+			<div class="space-y-4">
+				<div>
+					<label for="email" class="block text-sm font-medium text-gray-600">
+						Email Address <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="email"
+						id="email"
+						name="email"
+						bind:value={$form.email}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="email"
+					/>
+				</div>
+				<div>
+					<label for="phoneNumber" class="block text-sm font-medium text-gray-600">
+						Phone Number <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="tel"
+						id="phoneNumber"
+						name="phoneNumber"
+						bind:value={$form.phoneNumber}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="tel"
+						pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+						placeholder="123-456-7890"
+					/>
+				</div>
+
+				<fieldset class="mt-4">
+					<legend class="block text-sm font-medium text-gray-600">
+						Preferred Contact Method <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</legend>
+					<div class="mt-2 flex flex-col space-y-2 pl-4" role="radiogroup">
+						<label class="flex items-center">
+							<input
+								type="radio"
+								name="preferredContactMethod"
+								value="email"
+								bind:group={$form.preferredContactMethod}
+								id="contactMethodEmail"
+								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+							/>
+							<span class="ml-2">Email</span>
+						</label>
+						<label class="flex items-center">
+							<input
+								type="radio"
+								name="preferredContactMethod"
+								value="call"
+								bind:group={$form.preferredContactMethod}
+								id="contactMethodCall"
+								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+							/>
+							<span class="ml-2">Phone Call</span>
+						</label>
+						<label class="flex items-center">
+							<input
+								type="radio"
+								name="preferredContactMethod"
+								value="text"
+								bind:group={$form.preferredContactMethod}
+								id="contactMethodText"
+								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+							/>
+							<span class="ml-2">Text Message</span>
+						</label>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+		<!-- Delivery Information Section -->
+		<div role="region" aria-labelledby="delivery-info-title">
+			<h2 id="delivery-info-title" class="mb-4 text-lg font-semibold text-gray-700">Delivery Information</h2>
+			
+			<div class="space-y-4">
+				<div>
+					<label for="addressLine1" class="block text-sm font-medium text-gray-600">
+						Address Line 1 <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="text"
+						id="addressLine1"
 						name="deliveryAddress.addressLine1"
 						bind:value={$form.deliveryAddress.addressLine1}
 						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="address-line1"
 					/>
 				</div>
-				<div>
-					<label for="city" class="block text-sm font-medium text-gray-600">City *</label>
-					<input
-						type="text"
-						name="deliveryAddress.city"
-						bind:value={$form.deliveryAddress.city}
-						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-					/>
-				</div>
-				<div class="grid grid-cols-2 gap-4">
+
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
-						<label for="state" class="block text-sm font-medium text-gray-600">State *</label>
+						<label for="city" class="block text-sm font-medium text-gray-600">
+							City <span class="text-[#d33e27]" aria-hidden="true">*</span>
+							<span class="sr-only">required</span>
+						</label>
 						<input
 							type="text"
-							disabled
+							id="city"
+							name="deliveryAddress.city"
+							bind:value={$form.deliveryAddress.city}
+							class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+							required
+							aria-required="true"
+							autocomplete="address-level2"
+						/>
+					</div>
+					<div>
+						<label for="state" class="block text-sm font-medium text-gray-600">
+							State <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						</label>
+						<input
+							type="text"
+							id="state"
 							name="deliveryAddress.state"
 							bind:value={$form.deliveryAddress.state}
-							class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+							class="mt-1 w-full rounded-md border border-gray-300 bg-gray-100 p-2"
+							disabled
+							aria-disabled="true"
+							aria-label="State (Oregon only)"
+							autocomplete="address-level1"
 						/>
 					</div>
-					<div>
-						<label for="zipCode" class="block text-sm font-medium text-gray-600">ZIP Code *</label>
-						<input
-							type="text"
-							name="deliveryAddress.zipCode"
-							bind:value={$form.deliveryAddress.zipCode}
-							class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-						/>
-					</div>
+				</div>
+
+				<div>
+					<label for="zipCode" class="block text-sm font-medium text-gray-600">
+						ZIP Code <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="text"
+						id="zipCode"
+						name="deliveryAddress.zipCode"
+						bind:value={$form.deliveryAddress.zipCode}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						autocomplete="postal-code"
+						pattern="[0-9]{5}"
+						inputmode="numeric"
+						maxlength="5"
+					/>
 				</div>
 			</div>
 		</div>
 
-		<!-- Delivery Date -->
-		<div>
-			<label for="deliveryDate" class="block text-sm font-medium text-gray-600"
-				>Delivery Date (a.m.) *</label
-			>
-			<input
-				type="date"
-				name="deliveryDate"
-				bind:value={$form.deliveryDate}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			/>
+		<!-- Booking Details Section -->
+		<div role="region" aria-labelledby="booking-details-title">
+			<h2 id="booking-details-title" class="mb-4 text-lg font-semibold text-gray-700">Booking Details</h2>
+			
+			<div class="space-y-4">
+				<div>
+					<label for="deliveryDate" class="block text-sm font-medium text-gray-600">
+						Delivery Date (a.m.) <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="date"
+						id="deliveryDate"
+						name="deliveryDate"
+						bind:value={$form.deliveryDate}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						required
+						aria-required="true"
+						min={new Date().toISOString().split('T')[0]}
+					/>
+				</div>
+
+				<fieldset>
+					<legend class="block text-sm font-medium text-gray-600">
+						Number of Days <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</legend>
+					<div class="mt-2 flex flex-col space-y-2 pl-4" role="radiogroup">
+						{#each [1, 2, 3, 4, 5] as day}
+							<label class="flex items-center">
+								<input
+									type="radio"
+									id="day-{day}"
+									name="numberOfDays"
+									value={day}
+									bind:group={$form.numberOfDays}
+									class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+								/>
+								<span class="ml-2">{day} {day === 1 ? 'day' : 'days'}</span>
+							</label>
+						{/each}
+					</div>
+				</fieldset>
+			</div>
 		</div>
 
-		<!-- Number of Days -->
-		<div>
-			<label for="numberOfDays" class="block text-sm font-medium text-gray-600"
-				>Number of Days *</label
-			>
-			<select
-				name="numberOfDays"
-				bind:value={$form.numberOfDays}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			>
-				<option value="">Select number of days</option>
-				<option value="1">1 day</option>
-				<option value="2">2 days</option>
-				<option value="3">3 days</option>
-				<option value="4">4 days</option>
-				<option value="5">5 days</option>
-			</select>
-		</div>
+		<!-- Additional Options Section -->
+		<div role="region" aria-labelledby="additional-options-title">
+			
+			<div class="space-y-4">
+				<div>
+					<label for="additionalComments" class="block text-sm font-medium text-gray-600">
+						Additional Comments or Special Requests
+					</label>
+					<textarea
+						id="additionalComments"
+						name="additionalComments"
+						bind:value={$form.additionalComments}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						rows="4"
+						aria-label="Additional comments or special requests"
+						placeholder="Got special requests? Say so here and I'll be in touch :)"
+					></textarea>
+				</div>
 
-		<!-- Additional Info -->
-		<div>
-			<label for="additionalComments" class="block text-sm font-medium text-gray-600"
-				>Additional Comments</label
-			>
-			<textarea
-				name="additionalComments"
-				placeholder="Got special requests? Say so here and I'll be in touch :)"
-				bind:value={$form.additionalComments}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			></textarea>
-		</div>
 
 		<!-- Options -->
 		<div class="flex items-center space-x-2">
@@ -262,8 +381,8 @@
 				class="mt-4 w-full {isFormValid
 					? 'bg-[#d33e27]'
 					: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85"
-				>Submit</button
-			>
+				>Complete My Reservation
+			</button>
 		</div>
 	</form>
 </section>
