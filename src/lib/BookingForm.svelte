@@ -7,15 +7,18 @@
 		firstName: z.string().min(1, 'First Name is required'),
 		lastName: z.string().min(1, 'Last Name is required'),
 		preferredContactMethod: z.string().min(1, 'Preferred Contact Method is required'),
-		email: z.string().email('Email address is required'),
-		phoneNumber: z.string().min(1, 'Phone number is required'),
-		deliveryDate: z.string().min(1, 'Delivery date is required'),
+		email: z.string().email('Please enter a valid email address'),
+		phoneNumber: z.string().regex(/^\d{10}$/, 'Phone number must be 10 digits'),
+		deliveryDate: z.date().min(new Date(), 'Delivery date must be in the future'),
 		deliveryAddress: z.object({
 			addressLine1: z.string().min(1, 'Address Line 1 is required'),
 			addressLine2: z.string().optional(),
 			city: z.string().min(1, 'City is required'),
 			state: z.string().min(1, 'State is required'),
-			zipCode: z.string().min(1, 'ZIP Code is required'),
+			zipCode: z
+				.string()
+				.length(5, 'ZIP Code must be exactly 5 digits')
+				.regex(/^\d{5}$/, 'ZIP Code must be a 5-digit number'),
 			country: z.string().min(1, 'Country is required').default('United States')
 		}),
 		additionalComments: z.string().optional(),
@@ -70,17 +73,19 @@
 >
 	<h1 id="booking-form-title" class="mb-6 text-2xl font-semibold text-gray-700">Booking Form</h1>
 
-	<form 
-		method="POST" 
-		use:enhance 
+	<form
+		method="POST"
+		use:enhance
 		class="w-full space-y-4"
 		aria-label="Reservation booking form"
 		novalidate
 	>
 		<!-- Personal Information Section -->
 		<div role="region" aria-labelledby="personal-info-title">
-			<h2 id="personal-info-title" class="mb-4 text-lg font-semibold text-gray-700">Personal Information</h2>
-			
+			<h2 id="personal-info-title" class="mb-4 text-lg font-semibold text-gray-700">
+				Personal Information
+			</h2>
+
 			<div class="grid grid-cols-1 gap-4">
 				<div>
 					<label for="firstName" class="block text-sm font-medium text-gray-600">
@@ -119,8 +124,10 @@
 
 		<!-- Contact Information Section -->
 		<div role="region" aria-labelledby="contact-info-title">
-			<h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">Contact Information</h2>
-			
+			<h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">
+				Contact Information
+			</h2>
+
 			<div class="space-y-4">
 				<div>
 					<label for="email" class="block text-sm font-medium text-gray-600">
@@ -203,8 +210,10 @@
 
 		<!-- Delivery Information Section -->
 		<div role="region" aria-labelledby="delivery-info-title">
-			<h2 id="delivery-info-title" class="mb-4 text-lg font-semibold text-gray-700">Delivery Information</h2>
-			
+			<h2 id="delivery-info-title" class="mb-4 text-lg font-semibold text-gray-700">
+				Delivery Information
+			</h2>
+
 			<div class="space-y-4">
 				<div>
 					<label for="addressLine1" class="block text-sm font-medium text-gray-600">
@@ -223,7 +232,7 @@
 					/>
 				</div>
 
-				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					<div>
 						<label for="city" class="block text-sm font-medium text-gray-600">
 							City <span class="text-[#d33e27]" aria-hidden="true">*</span>
@@ -272,9 +281,22 @@
 						required
 						aria-required="true"
 						autocomplete="postal-code"
-						pattern="[0-9]{5}"
+						pattern="\d{5}"
 						inputmode="numeric"
 						maxlength="5"
+						oninput={(e) => {
+							// Remove any non-numeric characters
+							e.target.value = e.target.value.replace(/\D/g, '');
+							// Update the form value
+							$form.deliveryAddress.zipCode = e.target.value;
+						}}
+						onpaste={(e) => {
+							e.preventDefault();
+							// Get pasted content and clean it
+							const pastedContent = e.clipboardData.getData('text');
+							const numericValue = pastedContent.replace(/\D/g, '').slice(0, 5);
+							$form.deliveryAddress.zipCode = numericValue;
+						}}
 					/>
 				</div>
 			</div>
@@ -282,11 +304,20 @@
 
 		<!-- Booking Details Section -->
 		<div role="region" aria-labelledby="booking-details-title">
-			<h2 id="booking-details-title" class="mb-4 text-lg font-semibold text-gray-700">Booking Details</h2>
-			
+			<h2 id="booking-details-title" class="mb-4 text-lg font-semibold text-gray-700">
+				Booking Details
+			</h2>
+
 			<div class="space-y-4">
-				<div>
-					<label for="deliveryDate" class="block text-sm font-medium text-gray-600">
+				<div
+					class="relative"
+					onclick={() => {
+						const input = document.getElementById('deliveryDate');
+						input?.showPicker();
+					}}
+					role="presentation"
+				>
+					<label for="deliveryDate" class="block cursor-pointer text-sm font-medium text-gray-600">
 						Delivery Date (a.m.) <span class="text-[#d33e27]" aria-hidden="true">*</span>
 						<span class="sr-only">required</span>
 					</label>
@@ -295,7 +326,7 @@
 						id="deliveryDate"
 						name="deliveryDate"
 						bind:value={$form.deliveryDate}
-						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+						class="mt-1 w-full cursor-pointer rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
 						required
 						aria-required="true"
 						min={new Date().toISOString().split('T')[0]}
@@ -328,11 +359,10 @@
 
 		<!-- Additional Options Section -->
 		<div role="region" aria-labelledby="additional-options-title">
-			
 			<div class="space-y-4">
 				<div>
 					<label for="additionalComments" class="block text-sm font-medium text-gray-600">
-						Additional Comments or Special Requests
+						Additional Comments
 					</label>
 					<textarea
 						id="additionalComments"
@@ -345,44 +375,45 @@
 					></textarea>
 				</div>
 
+				<!-- Options -->
+				<div class="flex items-center space-x-2">
+					<input
+						type="checkbox"
+						name="isGift"
+						bind:checked={$form.isGift}
+						class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+					/>
+					<label for="isGift" class="text-sm font-medium text-gray-600">This is a gift</label>
+				</div>
+				<div class="flex items-center space-x-2">
+					<input
+						type="checkbox"
+						name="subscribe"
+						bind:checked={$form.subscribe}
+						class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+					/>
+					<label for="subscribe" class="text-sm font-medium text-gray-600"
+						>Sign up for news and updates</label
+					>
+				</div>
 
-		<!-- Options -->
-		<div class="flex items-center space-x-2">
-			<input
-				type="checkbox"
-				name="isGift"
-				bind:checked={$form.isGift}
-				class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
-			/>
-			<label for="isGift" class="text-sm font-medium text-gray-600">This is a gift</label>
-		</div>
-		<div class="flex items-center space-x-2">
-			<input
-				type="checkbox"
-				name="subscribe"
-				bind:checked={$form.subscribe}
-				class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
-			/>
-			<label for="subscribe" class="text-sm font-medium text-gray-600"
-				>Sign up for news and updates</label
-			>
-		</div>
+				<p class="mt-4 text-sm text-gray-500">
+					I try to respond and confirm bookings within a day or two. Be sure to check your spam
+					folder if you're expecting an email.
+				</p>
 
-		<p class="mt-4 text-sm text-gray-500">
-			I try to respond and confirm bookings within a day or two. Be sure to check your spam folder
-			if you're expecting an email.
-		</p>
-
-		<!-- Submit Button -->
-		<div>
-			<button
-				type="submit"
-				disabled={!isFormValid}
-				class="mt-4 w-full {isFormValid
-					? 'bg-[#d33e27]'
-					: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85"
-				>Complete My Reservation
-			</button>
+				<!-- Submit Button -->
+				<div>
+					<button
+						type="submit"
+						disabled={!isFormValid}
+						class="mt-4 w-full {isFormValid
+							? 'bg-[#d33e27]'
+							: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85"
+						>Complete My Reservation
+					</button>
+				</div>
+			</div>
 		</div>
 	</form>
 </section>
