@@ -50,7 +50,7 @@
 				aria-label="Book now"
 				>Book now!
 			</a>
-			<a href="/" aria-label="Home" class="block md:hidden p-4" 				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}>
+			<a href="/" aria-label="Home" class="block md:hidden p-4 scale-125" 				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}>
 				<svg
 					fill="currentColor"
 					height="24"
