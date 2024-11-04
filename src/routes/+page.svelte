@@ -51,7 +51,10 @@
 		</a>
 	</div>
 </div>
-<div class="bg-[#d33e27] sticky top-0" style="height: {navHeight - 24}px;"></div>
+<div
+	class="sticky top-0 md:h-[calc(var(--nav-height)-24px)] bg-[#d33e27] h-[calc(var(--nav-height))]"
+	style="--nav-height: {navHeight}px;"
+></div>
 
 <div class="mb-8 flex w-full justify-center">
 	<section class="h-full w-[80%]">
@@ -61,7 +64,7 @@
 				We can bring our mobile sauna anywhere in Wallowa County (as long as there are roads)
 			</p>
 		</div>
-		<div class="grid grid-cols-3 items-center gap-12">
+		<div class="grid grid-cols-2 items-center gap-12 md:grid-cols-3">
 			<enhanced:img
 				src="$lib/images/1.jpeg"
 				alt="Image 1"

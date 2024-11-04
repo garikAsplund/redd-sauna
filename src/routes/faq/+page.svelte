@@ -6,7 +6,7 @@
 	<title>Redd Sauna | FAQ</title>
 </svelte:head>
 
-<div class="flex w-full flex-col items-center pt-64 pb-24">
+<div class="flex w-full flex-col items-center pt-36 md:pt-64 pb-24">
 	<section class="w-[70%] space-y-12 text-black/80">
 		<h1 class="text-4xl text-center">Frequent Asked Questions</h1>
 
