@@ -29,6 +29,59 @@
 		<meta property="og:url" content="https://redd-sauna.vercel.app" />
 		<meta property="og:type" content="website" />
 
+		<!-- Schema -->
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Service",
+				"serviceType": "Mobile Sauna Service",
+				"provider": {
+					"@type": "Organization",
+					"name": "Redd Sauna",
+					"url": "https://redd-sauna.vercel.app",
+					"logo": "https://redd-sauna.vercel.app/redd-bg.jpeg",
+					"sameAs": ["https://www.instagram.com/reddsauna"]
+				},
+				"areaServed": {
+					"@type": "Place",
+					"name": "Wallowa County, Oregon"
+				},
+				"description": "Enjoy a mobile sauna experience with [Your Sauna Brand]. We bring the relaxation to you!",
+				"offers": [
+					{
+						"@type": "Offer",
+						"url": "https://redd-sauna.vercel.app/booking",
+						"priceCurrency": "USD",
+						"price": "90.00",
+						"priceValidUntil": "2025-12-31",
+						"description": "$90 for a single-day rental"
+					},
+					{
+						"@type": "Offer",
+						"url": "https://redd-sauna.vercel.app/booking",
+						"priceCurrency": "USD",
+						"price": "75.00",
+						"priceValidUntil": "2025-12-31",
+						"description": "$75 per day for a multi-day rental"
+					},
+					{
+						"@type": "Offer",
+						"url": "https://redd-sauna.vercel.app/booking",
+						"priceCurrency": "USD",
+						"price": "20.00",
+						"priceValidUntil": "2025-12-31",
+						"description": "$20 per hour for a visit"
+					}
+				],
+				"contactPoint": {
+					"@type": "ContactPoint",
+					"telephone": "+1-541-626-6261",
+					"email": "reddsauna@gmail.com",
+					"contactType": "Customer Service"
+				}
+			}
+		</script>
+
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">
