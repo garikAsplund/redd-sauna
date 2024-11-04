@@ -62,7 +62,7 @@
 			$form.email &&
 			$form.phoneNumber &&
 			$form.deliveryDate &&
-      $form.numberOfDays
+			$form.numberOfDays
 	);
 </script>
 
@@ -73,6 +73,8 @@
 
 	<form method="POST" use:enhance class="w-full space-y-4">
 		<!-- Name fields -->
+		<h3 class="text-lg font-semibold text-gray-700">Contact Info</h3>
+
 		<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 			<div>
 				<label for="firstName" class="block text-sm font-medium text-gray-600">First Name *</label>
@@ -92,23 +94,6 @@
 					class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
 				/>
 			</div>
-		</div>
-
-		<!-- Contact Method -->
-		<div>
-			<label for="preferredContactMethod" class="block text-sm font-medium text-gray-600"
-				>Preferred Contact Method *</label
-			>
-			<select
-				name="preferredContactMethod"
-				bind:value={$form.preferredContactMethod}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			>
-				<option value="">Select an option</option>
-				<option value="email">Email</option>
-				<option value="call">Call</option>
-				<option value="text">Text</option>
-			</select>
 		</div>
 
 		<!-- Contact Info -->
@@ -132,36 +117,20 @@
 			/>
 		</div>
 
-		<!-- Delivery Date -->
+		<!-- Contact Method -->
 		<div>
-			<label for="deliveryDate" class="block text-sm font-medium text-gray-600"
-				>Delivery Date (A.M.)</label
-			>
-			<input
-				type="date"
-				name="deliveryDate"
-				bind:value={$form.deliveryDate}
-				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-			/>
-		</div>
-
-		<!-- Number of Days -->
-		<div>
-			<label for="numberOfDays" class="block text-sm font-medium text-gray-600"
-				>Number of Days *</label
+			<label for="preferredContactMethod" class="block text-sm font-medium text-gray-600"
+				>Preferred Contact Method *</label
 			>
 			<select
-				name="numberOfDays"
-				bind:value={$form.numberOfDays}
+				name="preferredContactMethod"
+				bind:value={$form.preferredContactMethod}
 				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
 			>
-				<option value="">Select number of days</option>
-				<option value="1">1 day</option>
-				<option value="2">2 days</option>
-				<option value="3">3 days</option>
-				<option value="4">4 days</option>
-				<option value="5">5 days</option>
-				<!-- Add more options as needed -->
+				<option value="">Select an option</option>
+				<option value="email">Email</option>
+				<option value="call">Call</option>
+				<option value="text">Text</option>
 			</select>
 		</div>
 
@@ -211,6 +180,38 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- Delivery Date -->
+		<div>
+			<label for="deliveryDate" class="block text-sm font-medium text-gray-600"
+				>Delivery Date (a.m.) *</label
+			>
+			<input
+				type="date"
+				name="deliveryDate"
+				bind:value={$form.deliveryDate}
+				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+			/>
+		</div>
+
+		<!-- Number of Days -->
+		<div>
+			<label for="numberOfDays" class="block text-sm font-medium text-gray-600"
+				>Number of Days *</label
+			>
+			<select
+				name="numberOfDays"
+				bind:value={$form.numberOfDays}
+				class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+			>
+				<option value="">Select number of days</option>
+				<option value="1">1 day</option>
+				<option value="2">2 days</option>
+				<option value="3">3 days</option>
+				<option value="4">4 days</option>
+				<option value="5">5 days</option>
+			</select>
 		</div>
 
 		<!-- Additional Info -->
