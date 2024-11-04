@@ -61,7 +61,7 @@
 		<div class="my-32 flex flex-col items-center justify-center space-y-12">
 			<p class="text-4xl font-bold">…a cozy and invigorating sauna right outside your door.</p>
 			<p class="text-2xl font-thin">
-				We can bring our mobile sauna anywhere in Wallowa County (as long as there are roads)
+				We can bring our mobile sauna anywhere in Wallowa County (as long as there are roads).
 			</p>
 		</div>
 		<div class="grid grid-cols-2 items-center gap-12 md:grid-cols-3">
