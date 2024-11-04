@@ -3,7 +3,7 @@
 href="https://www.instagram.com/reddsauna"
 target="_blank"
 rel="noopener"
-class="p-4 hover:opacity-65 opacity-85 scale-125"
+class="p-4 hover:opacity-75 scale-125"
 >
 <svg
     aria-label="Redd Sauna on Instagram"

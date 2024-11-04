@@ -1,3 +1,7 @@
+<script>
+	import BookingForm from "$lib/BookingForm.svelte";
+</script>
+
 <section class="w-full px-8 pt-64 flex justify-center">
 	<iframe
 		scrolling="no"
@@ -9,4 +13,5 @@
 		frameborder="0"
 		height="600"
 	></iframe>
+    <!-- <BookingForm /> -->
 </section>

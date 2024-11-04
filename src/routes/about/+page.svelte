@@ -1,7 +1,3 @@
-<script lang="ts">
-	import { faqs } from '$lib/faq';
-</script>
-
 <div class="flex w-full flex-col items-center pt-64 pb-24">
 	<section class="w-[70%] space-y-12 text-black/80">
 		<h1 class="text-4xl text-center">The Redd Sauna Rundown</h1>

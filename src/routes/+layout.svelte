@@ -1,10 +1,18 @@
 <script lang="ts">
+	import Footer from '$lib/Footer.svelte';
 	import Nav from '$lib/Nav.svelte';
 	import '../app.css';
 
 	let { children } = $props();
+	let scrollY = $state(0);
 </script>
 
-<Nav />
+<svelte:window bind:scrollY />
 
-{@render children()}
+<main class="flex min-h-screen flex-col">
+	<Nav {scrollY}/>
+
+	{@render children()}
+
+	<Footer />
+</main>
