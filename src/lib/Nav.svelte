@@ -7,12 +7,12 @@
 </script>
 
 <nav
-	class="fixed top-0 z-40 w-full md:pb-36 font-bold {$page.url.pathname === '/'
+	class="fixed top-0 z-40 w-full md:pb-16 font-bold {$page.url.pathname === '/'
 		? 'text-white'
 		: 'bg-white text-black'}"
 	id="nav"
 >
-	<div class="relative flex w-full items-center justify-between md:px-24 md:pt-8">
+	<div class="relative flex w-full items-center justify-between md:px-24 md:pt-16">
 		<div class="flex ">
 			<a
 				href="/about"
@@ -36,7 +36,7 @@
 		<a
 			href="/"
 			aria-label="Home"
-			class="absolute left-1/2 -translate-x-1/2 translate-y-1/4 transform hover:opacity-75 hidden md:block"
+			class="absolute left-1/2 -translate-x-1/2 translate-y-1/6 transform hover:opacity-75 hidden md:block mt-4"
 		>
 			<Logo />
 		</a>

@@ -52,7 +52,7 @@
 	</div>
 </div>
 <div
-	class="sticky top-0 md:h-[calc(var(--nav-height)-24px)] bg-[#d33e27] h-[calc(var(--nav-height))]"
+	class="sticky top-0 md:h-[calc(var(--nav-height)+8px)] bg-[#d33e27] h-[calc(var(--nav-height))]"
 	style="--nav-height: {navHeight}px;"
 ></div>
 
