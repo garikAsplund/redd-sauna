@@ -12,7 +12,7 @@
 >
 <div 
 class="w-full max-w-lg rounded-lg bg-white p-8 text-center shadow-lg space-y-6 animate-fade-in"
-in:fly={{ y: 200, duration: 800, opacity: 0 }}
+in:fly={{ y: 100, duration: 800, opacity: 0 }}
 >
         <h1 class="text-3xl font-bold text-[#d33e27]">
             Thank you for booking 🎉
