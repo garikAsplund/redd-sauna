@@ -1,18 +1,5 @@
 import { z } from 'zod';
 
-const phoneRegex = /^(?:\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$/;
-
-console.log(phoneRegex.test("7404050880"));      // true
-console.log(phoneRegex.test("(740) 405-0880"));  // true
-console.log(phoneRegex.test("740-405-0880"));    // true
-console.log(phoneRegex.test("(740)4050880"));    // true
-console.log(phoneRegex.test("740 405 0880"));    // true
-console.log(phoneRegex.test("740.405.0880"));    // true
-console.log(phoneRegex.test("740-405-088"));     // false
-console.log(phoneRegex.test("740-405-08800"));   // false
-console.log(phoneRegex.test("740-405-088p"));     // false
-console.log(phoneRegex.test("garukc2ccc"));     // false
-
 export const schema = z.object({
 	firstName: z.string().min(1, 'First Name is required').default(''),
 	lastName: z.string().min(1, 'Last Name is required').default(''),

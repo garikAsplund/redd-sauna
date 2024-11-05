@@ -1,7 +1,10 @@
 <script lang="ts">
-	import Logo from '$lib/Logo.svelte';
-	import Instagram from '$lib/Instagram.svelte';
+	import Logo from '$lib/svg/Logo.svelte';
+	import InstagramSVG from '$lib/svg/InstagramSVG.svelte';
 	import { page } from '$app/stores';
+	import VenmoSVG  from '$lib/svg/VenmoSVG.svelte';
+	import HomeSVG from '$lib/svg/HomeSVG.svelte';
+
 	let { scrollY } = $props();
 </script>
 
@@ -45,21 +48,24 @@
 		</a>
 		<div class="flex items-center">
 			<a
-				href="/booking"
-				class="mx-4 hidden p-2 px-4 text-2xl hover:opacity-75 md:block {scrollY < 10 &&
-				$page.url.pathname === '/'
-					? 'invisible'
-					: ''} {$page.url.pathname === '/booking'
-					? 'border-b-2 border-black'
-					: $page.url.pathname === '/'
-						? 'border-2 border-white'
-						: 'border-2 border-[#d33e27]'}"
-				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
-				aria-label="Book now"
-				aria-current={$page.url.pathname === '/booking' ? 'page' : undefined}
-			>
-				Book Now
-			</a>
+			href="/booking"
+			class="mx-4 hidden p-2 px-4 text-2xl md:block
+				{$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
+				{$page.url.pathname === '/booking' ? 'border-b-2 border-black' : ''}
+				{$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
+			"
+			style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
+			aria-label="Book now"
+			aria-current={$page.url.pathname === '/booking' ? 'page' : undefined}
+			onmouseover={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
+			onmouseleave={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
+			onfocus={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
+			onblur={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
+		>
+			Book Now
+		</a>
+		
+
 			<a
 				href="/"
 				aria-label="Home"
@@ -67,23 +73,25 @@
 				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
 				aria-current={$page.url.pathname === '/' ? 'page' : undefined}
 			>
-				<svg
-					aria-label="Home"
-					fill="currentColor"
-					height="24"
-					role="img"
-					viewBox="0 0 24 24"
-					width="24"
-					><title>Home</title><path
-						d="M9.005 16.545a2.997 2.997 0 0 1 2.997-2.997A2.997 2.997 0 0 1 15 16.545V22h7V11.543L12 2 2 11.543V22h7.005Z"
-						fill="none"
-						stroke="currentColor"
-						stroke-linejoin="round"
-						stroke-width="2"
-					></path></svg
-				>
+				<HomeSVG />
 			</a>
-			<Instagram />
+			<a
+				href="https://account.venmo.com/u/reddsauna"
+				rel="noopener noreferrer"
+				target="_blank"
+				aria-label="Venmo"
+				class="scale-125 p-4 hover:opacity-75"
+			>
+				<VenmoSVG />
+			</a>
+			<a
+				href="https://www.instagram.com/reddsauna"
+				target="_blank"
+				rel="noopener"
+				class="scale-125 p-4 hover:opacity-75"
+			>
+				<InstagramSVG />
+			</a>
 		</div>
 	</div>
 </nav>
