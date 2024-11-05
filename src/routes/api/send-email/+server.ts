@@ -49,7 +49,7 @@ export async function POST({ request }) {
         </ul>
         <p><strong>Gift:</strong> ${isGift ? 'Yes' : 'No'}</p>
         <p><strong>Additional Comments:</strong></p>
-        <p>${additionalComments || 'None'}</p>
+        <p>${additionalComments || 'None, Your Honor'}</p>
     `
 	};
 
