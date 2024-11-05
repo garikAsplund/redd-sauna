@@ -403,7 +403,7 @@
 			<div role="region" aria-labelledby="additional-options-title">
 				<div class="space-y-4">
 					<div>
-						<label for="additionalComments" class="block text-sm font-medium text-gray-600">
+						<label for="additionalComments" class="block text-sm font-medium text-gray-600 pt-4">
 							Additional Comments
 						</label>
 						<textarea
@@ -457,8 +457,9 @@
 					</div>
 
 					<p class="mt-4 text-sm text-gray-500">
-						I try to respond and confirm bookings within a day or two. Be sure to check your spam
-						folder if you're expecting an email.
+						I try to respond and confirm bookings within a day or two. </p>
+            <p class="mt-4 text-sm text-gray-500">
+            Be sure to check your spam folder if you're expecting an email.
 					</p>
 
 					<!-- Submit Button -->
