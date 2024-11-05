@@ -50,6 +50,7 @@ export async function POST({ request }) {
         <p><strong>Gift:</strong> ${isGift ? 'Yes' : 'No'}</p>
         <p><strong>Additional Comments:</strong></p>
         <p>${additionalComments || 'None, Your Honor'}</p>
+        <p><strong>Total:</strong> $${numberOfDays * (numberOfDays > 1 ? 75 : 90)}</p>
     `
 	};
 

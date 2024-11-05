@@ -27,12 +27,6 @@
 		if (isFormValid) {
       try {
         isSubmitting = true;
-				await fetch('/booking', {
-					method: 'POST',
-					body: JSON.stringify($form),
-					headers: { 'Content-Type': 'application/json' }
-				});
-
 			} catch (error) {
 				console.error('Error submitting form:', error);
 				isSubmitting = false;
