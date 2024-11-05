@@ -2,7 +2,7 @@
 	import Logo from '$lib/svg/Logo.svelte';
 	import InstagramSVG from '$lib/svg/InstagramSVG.svelte';
 	import { page } from '$app/stores';
-	import VenmoSVG  from '$lib/svg/VenmoSVG.svelte';
+	import VenmoSVG from '$lib/svg/VenmoSVG.svelte';
 	import HomeSVG from '$lib/svg/HomeSVG.svelte';
 
 	let { scrollY } = $props();
@@ -48,24 +48,27 @@
 		</a>
 		<div class="flex items-center">
 			<a
-			href="/booking"
-			class="mx-4 hidden p-2 px-4 text-2xl md:block
+				href="/booking"
+				class="mx-4 hidden p-2 px-4 text-2xl md:block
 				{$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
 				{$page.url.pathname === '/booking' ? 'border-b-2 border-black' : ''}
-				{$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
-			"
-			style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
-			aria-label="Book now"
-			aria-current={$page.url.pathname === '/booking' ? 'page' : undefined}
-			onmouseover={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
-			onmouseleave={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
-			onfocus={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
-			onblur={() => scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
-		>
-			Book Now
-		</a>
-		
-
+				{$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}"
+				style={$page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
+				aria-label="Book now"
+				aria-current={$page.url.pathname === '/booking' ? 'page' : undefined}
+				onmouseover={() =>
+					scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
+				onmouseleave={() =>
+					scrollY >= 10 &&
+					($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
+				onfocus={() =>
+					scrollY >= 10 && ($page.url.pathname === '/' ? (event.target.style.opacity = 0.75) : '')}
+				onblur={() =>
+					scrollY >= 10 &&
+					($page.url.pathname === '/' ? (event.target.style.opacity = scrollY / 300) : '')}
+			>
+				Book Now
+			</a>
 			<a
 				href="/"
 				aria-label="Home"
