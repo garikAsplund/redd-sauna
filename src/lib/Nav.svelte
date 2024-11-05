@@ -50,28 +50,18 @@
 			<a
 				href="/booking"
 				class="mx-4 hidden p-2 px-4 text-2xl md:block
-				{$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : 'border-2 border-white'}
-				{$page.url.pathname === '/' ? 'border-2 border-white' : '!border-2 !border-[#d33e27]'}
-
-				{$page.url.pathname === '/booking' ? '!border-b-2 !border-black' : 'border-2 border-[#d33e27]'}
-			"
+        {$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
+        {$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
+        {$page.url.pathname === '/booking' ? 'border-b-2 border-white border-b-black' : ''}"
 				style={$page.url.pathname === '/'
 					? `opacity: ${scrollY / 300}; transition: opacity 0.3s`
 					: ''}
 				aria-label="Book now"
 				aria-current={$page.url.pathname === '/booking' ? 'page' : undefined}
-				onmouseover={() =>
-					(scrollY >= 10 && $page.url.pathname === '/') || $page.url.pathname !== '/' ? (event.target.style.opacity = 0.75) : ''}
-				onmouseleave={() =>
-					(scrollY >= 10 && $page.url.pathname === '/') || $page.url.pathname !== '/'
-						? (event.target.style.opacity = 1)
-						: ''}
-				onfocus={() =>
-					(scrollY >= 10 && $page.url.pathname === '/') || $page.url.pathname !== '/' ? (event.target.style.opacity = 0.75) : ''}
-				onblur={() =>
-					(scrollY >= 10 && $page.url.pathname === '/') || $page.url.pathname !== '/'
-						? (event.target.style.opacity = 1)
-						: ''}
+				onmouseover={() => (event.target.style.opacity = 0.75)}
+				onmouseleave={() => (event.target.style.opacity = 1)}
+				onfocus={() => (event.target.style.opacity = 0.75)}
+				onblur={() => (event.target.style.opacity = 1)}
 			>
 				Book Now
 			</a>
