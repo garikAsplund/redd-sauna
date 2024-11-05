@@ -25,13 +25,16 @@
 	async function handleSubmit(event) {
 		event.preventDefault();
 		if (isFormValid) {
-			isSubmitting = true;
-			try {
-				await new Promise((resolve) => setTimeout(resolve, 2000));
-				console.log('Form submitted successfully:', $form);
+      try {
+        isSubmitting = true;
+				await fetch('/booking', {
+					method: 'POST',
+					body: JSON.stringify($form),
+					headers: { 'Content-Type': 'application/json' }
+				});
+
 			} catch (error) {
 				console.error('Error submitting form:', error);
-			} finally {
 				isSubmitting = false;
 			}
 		}
