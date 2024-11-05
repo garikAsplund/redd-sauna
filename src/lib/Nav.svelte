@@ -52,7 +52,7 @@
 				class="mx-4 hidden p-2 px-4 text-2xl md:block
         {$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
         {$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
-        {$page.url.pathname === '/booking' ? 'border-b-2 border-white border-b-black' : ''}"
+        {$page.url.pathname === '/booking' ? 'border-b-2 border-none border-b-black' : ''}"
 				style={$page.url.pathname === '/'
 					? `opacity: ${scrollY / 300}; transition: opacity 0.3s`
 					: ''}
