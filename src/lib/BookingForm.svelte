@@ -1,58 +1,14 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import { superForm } from 'sveltekit-superforms';
-	import { z } from 'zod';
+	import SuperDebug, { superForm } from 'sveltekit-superforms';
+	import { schema } from '$lib/zod';
+  import { dev } from '$app/environment';
 
-	const schema = z.object({
-		firstName: z.string().min(1, 'First Name is required'),
-		lastName: z.string().min(1, 'Last Name is required'),
-		preferredContactMethod: z.string().min(1, 'Preferred Contact Method is required'),
-		email: z.string().email('Please enter a valid email address'),
-		phoneNumber: z.string().regex(/^\d{10}$/, 'Phone number must be 10 digits'),
-		deliveryDate: z.date().min(new Date(), 'Delivery date must be in the future'),
-		deliveryAddress: z.object({
-			addressLine1: z.string().min(1, 'Address Line 1 is required'),
-			addressLine2: z.string().optional(),
-			city: z.string().min(1, 'City is required'),
-			state: z.string().min(1, 'State is required'),
-			zipCode: z
-				.string()
-				.length(5, 'ZIP Code must be exactly 5 digits')
-				.regex(/^\d{5}$/, 'ZIP Code must be a 5-digit number'),
-			country: z.string().min(1, 'Country is required').default('United States')
-		}),
-		additionalComments: z.string().optional(),
-		isGift: z.boolean().optional(),
-		numberOfDays: z.number().min(1, 'Please select at least one day').optional(),
-		subscribe: z.boolean().optional()
+	let { data } = $props();
+  let isSubmitting: boolean = $state(false);
+	const { form, errors, constraints, message, enhance } = superForm(data.form, {
+		schema,
+		dataType: 'json'
 	});
-
-	// Initialize form data
-	const data = {
-		form: {
-			firstName: '',
-			lastName: '',
-			preferredContactMethod: '',
-			email: '',
-			phoneNumber: '',
-			deliveryDate: '',
-			deliveryAddress: {
-				addressLine1: '',
-				addressLine2: '',
-				city: '',
-				state: 'Oregon',
-				zipCode: '',
-				country: 'United States'
-			},
-			additionalComments: '',
-			isGift: false,
-			numberOfDays: 1,
-			subscribe: false
-		}
-	};
-
-	const { form } = superForm(data.form, { schema, dataType: 'json' });
-
 	const isFormValid = $derived(
 		$form.firstName &&
 			$form.lastName &&
@@ -65,6 +21,22 @@
 			$form.deliveryDate &&
 			$form.numberOfDays
 	);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+		if (isFormValid) {
+			isSubmitting = true; 
+			try {
+				// Simulate a form submission (replace this with your actual submission logic)
+				await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate a delay
+				console.log("Form submitted successfully:", $form);
+			} catch (error) {
+				console.error("Error submitting form:", error);
+			} finally {
+				isSubmitting = false; // Reset to false after submission
+			}
+		}
+	};
 </script>
 
 <section
@@ -73,12 +45,16 @@
 >
 	<h1 id="booking-form-title" class="mb-6 text-2xl font-semibold text-gray-700">Booking Form</h1>
 
+	<SuperDebug data={$form} display={dev}></SuperDebug>
+
 	<form
 		method="POST"
 		use:enhance
 		class="w-full space-y-4"
 		aria-label="Reservation booking form"
 		novalidate
+    onsubmit={handleSubmit}
+
 	>
 		<!-- Personal Information Section -->
 		<div role="region" aria-labelledby="personal-info-title">
@@ -406,11 +382,12 @@
 				<div>
 					<button
 						type="submit"
-						disabled={!isFormValid}
-						class="mt-4 w-full {isFormValid
+						disabled={!isFormValid || isSubmitting}
+						class="mt-4 w-full {isFormValid && !isSubmitting
 							? 'bg-[#d33e27]'
 							: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85"
-						>Complete My Reservation
+					>
+						{isSubmitting ? 'Please wait...' : 'Complete My Reservation'}
 					</button>
 				</div>
 			</div>

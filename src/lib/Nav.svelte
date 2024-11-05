@@ -6,7 +6,7 @@
 </script>
 
 <nav
-	class="fixed top-0 z-40 w-full md:pb-16 font-bold {$page.url.pathname === '/'
+	class="fixed top-0 z-40 w-full md:pb-20 font-bold {$page.url.pathname === '/'
 		? 'text-white'
 		: 'bg-white text-black'}"
 	id="nav"

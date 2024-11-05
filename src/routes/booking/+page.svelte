@@ -1,5 +1,7 @@
 <script>
 	import BookingForm from "$lib/BookingForm.svelte";
+	
+	let { data } = $props();
 </script>
 
 <svelte:head>
@@ -18,5 +20,5 @@
 			class="border-0 w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] max-h-screen overflow-x-hidden"
 		></iframe>
 	</div>
-    <BookingForm />
+    <BookingForm {data} />
 </section>

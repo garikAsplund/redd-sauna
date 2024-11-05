@@ -2,24 +2,21 @@
 	import { onMount } from 'svelte';
 
 	let scrollY = $state(0);
-	let navHeight: number = $state(0); // To store the height of the nav
+	let navHeight: number = $state(0);
 
-	// Call calculateNavHeight when the component mounts
 	onMount(() => {
-		let navElement: HTMLDivElement = document.getElementById('nav'); // Reference for the nav element
+		let navElement: HTMLDivElement = document.getElementById('nav');
 
-		// Function to calculate the height of the nav
 		function calculateNavHeight() {
 			if (navElement) {
-				navHeight = navElement.offsetHeight; // Get the height of the nav
-				console.log(`Navigation height: ${navHeight}px`); // Log the height
+				navHeight = navElement.offsetHeight; 
+				// console.log(`Navigation height: ${navHeight}px`);
 			}
 		}
 		calculateNavHeight();
-		// Optional: Add an event listener to recalculate on window resize
 		window.addEventListener('resize', calculateNavHeight);
 		return () => {
-			window.removeEventListener('resize', calculateNavHeight); // Clean up on unmount
+			window.removeEventListener('resize', calculateNavHeight);
 		};
 	});
 </script>
@@ -52,7 +49,7 @@
 	</div>
 </div>
 <div
-	class="sticky top-0 md:h-[calc(var(--nav-height)+8px)] bg-[#d33e27] h-[calc(var(--nav-height))]"
+	class="sticky top-0 md:h-[calc(var(--nav-height)+1px)] bg-[#d33e27] h-[calc(var(--nav-height))]"
 	style="--nav-height: {navHeight}px;"
 ></div>
 
