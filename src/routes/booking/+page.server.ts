@@ -30,7 +30,7 @@ export const actions = {
 			if (response.ok) {
 				throw redirect(
 					302,
-					`/thanks?date=${form.data.deliveryDate}&days=${form.data.numberOfDays}&address=${form.data.deliveryAddress}&name=${form.data.firstName}`
+					`/thanks?name=${form.data.firstName}&email=${form.data.email}`
 				);
 			} else {
 				const errorData = await response.json();
