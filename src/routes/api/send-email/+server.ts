@@ -1,20 +1,18 @@
-// src/routes/api/send-email/+server.js
 import nodemailer from 'nodemailer';
 
 export async function POST({ request }) {
-	const formData = await request.json(); // Get form data from the request
+	const formData = await request.json(); 
 
-	// Create a Nodemailer transporter
-	const transporter = nodemailer.createTransport({
-		host: 'smtp.gmail.com', // Replace with your email provider's SMTP server
-		port: 587, // Usually 587 for TLS or 465 for SSL
-		secure: false, // true for 465, false for other ports
+    const transporter = nodemailer.createTransport({
+		host: 'smtp.gmail.com',
+		port: 587,
+		secure: false,
 		auth: {
-			user: import.meta.env.VITE_EMAIL_USER, // Your email address
-			pass: import.meta.env.VITE_EMAIL_PASSWORD // Your email password
+			user: import.meta.env.VITE_EMAIL_USER,
+			pass: import.meta.env.VITE_EMAIL_PASSWORD
 		}
-	});
-	// Destructure form data for easier reference
+    });
+    
 	const {
 		firstName,
 		lastName,
@@ -29,11 +27,10 @@ export async function POST({ request }) {
 		subscribe
 	} = formData.data;
 
-	// Set up HTML email template
 	const mailOptions = {
-		from: 'garik.asplund@gmail.com',
-		to: 'garik.asplund@gmail.com',
-		subject: 'New Booking Request',
+		from: 'garik.asplund@gmail.com', // Replace with reddsauna@gmail.com
+		to: 'garik.asplund@gmail.com', // Replace with ${email}
+		subject: 'New Booking Request', // Edit
 		html: `
         <h2>New Booking Request</h2>
         <p><strong>Name:</strong> ${firstName} ${lastName}</p>
@@ -55,7 +52,6 @@ export async function POST({ request }) {
 	};
 
 	try {
-		// Send mail
 		await transporter.sendMail(mailOptions);
 		return new Response(JSON.stringify({ success: true }), { status: 200 });
 	} catch (error) {

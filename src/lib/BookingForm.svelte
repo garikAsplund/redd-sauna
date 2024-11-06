@@ -473,7 +473,7 @@
 							disabled={!isFormValid || isSubmitting}
 							class="mt-4 w-full {isFormValid && !isSubmitting
 								? 'bg-[#d33e27]'
-								: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85"
+								: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85 disabled:cursor-not-allowed"
 							aria-disabled={!isFormValid || isSubmitting}
 						>
 							{isSubmitting ? 'Please wait...' : 'Complete My Reservation'}
