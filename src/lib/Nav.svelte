@@ -41,7 +41,7 @@
 		<a
 			href="/"
 			aria-label="Home"
-			class="translate-y-1/6 absolute left-1/2 mt-4 hidden -translate-x-1/2 transform hover:opacity-75 md:block"
+			class="translate-y-1/6 absolute left-1/2 mt-4 hidden -translate-x-1/2 transform hover:opacity-75 md:block md:scale-75 lg:scale-100"
 			aria-current={$page.url.pathname === '/' ? 'page' : undefined}
 		>
 			<Logo />
@@ -49,7 +49,7 @@
 		<div class="flex items-center">
 			<a
 				href="/booking"
-				class="mx-4 hidden p-2 px-4 text-2xl md:block
+				class="hidden p-2 lg:px-4 text-2xl md:block md:scale-75 lg:scale-100
         {$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
         {$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
         {$page.url.pathname === '/booking' ? 'invisible' : ''}"

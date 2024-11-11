@@ -2,17 +2,19 @@
 	import SuperDebug, { superForm } from 'sveltekit-superforms';
 	import { schema } from '$lib/zod';
 	import { dev } from '$app/environment';
+	import { zod } from 'sveltekit-superforms/adapters';
 
 	let { data } = $props();
 	let isSubmitting: boolean = $state(false);
-	const { form, errors, constraints, message, enhance } = superForm(data.form, {
+	const { form, errors, constraints, message, enhance, validateForm } = superForm(data.form, {
+		validators: zod(schema),
 		schema,
 		dataType: 'json'
 	});
 	const isFormValid = $derived(
 		$form.firstName &&
 			$form.lastName &&
-			$form.preferredContactMethod &&
+			// $form.preferredContactMethod &&
 			$form.deliveryAddress.addressLine1 &&
 			$form.deliveryAddress.city &&
 			$form.deliveryAddress.zipCode &&
@@ -22,15 +24,22 @@
 			$form.numberOfDays
 	);
 
+
 	async function handleSubmit(event) {
-		event.preventDefault();
-		if (isFormValid) {
-      try {
-        isSubmitting = true;
+		event.preventDefault();	
+		const result = await validateForm();
+
+		if (result.valid) {
+			isSubmitting = true;
+			try {
+				
 			} catch (error) {
 				console.error('Error submitting form:', error);
 				isSubmitting = false;
 			}
+		} else {
+			console.error('Form is not valid');
+			isSubmitting = false;
 		}
 	}
 </script>
@@ -72,6 +81,7 @@
 							? 'border-red-500'
 							: ''}"
 						required
+						maxlength="35"
 						aria-required="true"
 						aria-invalid={$errors.firstName ? 'true' : undefined}
 						autocomplete="given-name"
@@ -94,6 +104,7 @@
 							? 'border-red-500'
 							: ''}"
 						required
+						maxlength="35"
 						aria-required="true"
 						aria-invalid={$errors.lastName ? 'true' : undefined}
 						autocomplete="family-name"
@@ -107,9 +118,9 @@
 
 		<!-- Contact Information Section -->
 		<div role="region" aria-labelledby="contact-info-title">
-			<h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">
+			<!-- <h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">
 				Contact Information
-			</h2>
+			</h2> -->
 
 			<div class="space-y-4">
 				<div>
@@ -126,6 +137,7 @@
 							? 'border-red-500'
 							: ''}"
 						required
+						maxlength="255"
 						aria-required="true"
 						aria-invalid={$errors.email ? 'true' : undefined}
 						autocomplete="email"
@@ -134,42 +146,43 @@
 						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.email}</p>
 					{/if}
 				</div>
-        <div>
-          <label for="phoneNumber" class="block text-sm font-medium text-gray-600">
-            Phone Number <span class="text-[#d33e27]" aria-hidden="true">*</span>
-            <span class="sr-only">required</span>
-          </label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            bind:value={$form.phoneNumber}
-            class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 {$errors.phoneNumber ? 'border-red-500' : ''}"
-            required
-            aria-required="true"
-            aria-invalid={$errors.phoneNumber ? 'true' : undefined}
-            autocomplete="tel"
-            pattern="^(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$"
-            placeholder="(123) 456-7890"
-            maxlength="14"
-            oninput={(e) => {
-              e.target.value = e.target.value.replace(/[^0-9().-\s]/g, '');
-              $form.phoneNumber = e.target.value;
-            }}
-            onpaste={(e) => {
-              e.preventDefault();
-              const pastedContent = e.clipboardData.getData('text');
-              const formattedValue = pastedContent.replace(/[^0-9().-\s]/g, '');
-              $form.phoneNumber = formattedValue;
-            }}
-          />
-          {#if $errors.phoneNumber}
-            <p class="mt-1 text-sm text-red-500" role="alert">{$errors.phoneNumber}</p>
-          {/if}
-        </div>
-        
+				<div>
+					<label for="phoneNumber" class="block text-sm font-medium text-gray-600">
+						Phone Number <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						<span class="sr-only">required</span>
+					</label>
+					<input
+						type="tel"
+						id="phoneNumber"
+						name="phoneNumber"
+						bind:value={$form.phoneNumber}
+						class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 {$errors.phoneNumber
+							? 'border-red-500'
+							: ''}"
+						required
+						aria-required="true"
+						aria-invalid={$errors.phoneNumber ? 'true' : undefined}
+						autocomplete="tel"
+						pattern="^(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$"
+						placeholder="(123) 456-7890"
+						maxlength="15"
+						oninput={(e) => {
+							e.target.value = e.target.value.replace(/[^0-9().-\s]/g, '');
+							$form.phoneNumber = e.target.value;
+						}}
+						onpaste={(e) => {
+							e.preventDefault();
+							const pastedContent = e.clipboardData.getData('text');
+							const formattedValue = pastedContent.replace(/[^0-9().-\s]/g, '');
+							$form.phoneNumber = formattedValue;
+						}}
+					/>
+					{#if $errors.phoneNumber}
+						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.phoneNumber}</p>
+					{/if}
+				</div>
 
-				<fieldset class="mt-4">
+				<!-- <fieldset class="mt-4">
 					<legend class="block text-sm font-medium text-gray-600">
 						Preferred Contact Method <span class="text-[#d33e27]" aria-hidden="true">*</span>
 						<span class="sr-only">required</span>
@@ -212,7 +225,7 @@
 					{#if $errors.preferredContactMethod}
 						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.preferredContactMethod}</p>
 					{/if}
-				</fieldset>
+				</fieldset> -->
 			</div>
 		</div>
 
@@ -238,6 +251,7 @@
 							? 'border-red-500'
 							: ''}"
 						required
+						maxlength="100"
 						aria-required="true"
 						aria-invalid={$errors.deliveryAddress?.addressLine1 ? 'true' : undefined}
 						autocomplete="address-line1"
@@ -265,6 +279,7 @@
 								? 'border-red-500'
 								: ''}"
 							required
+							maxlength="50"
 							aria-required="true"
 							aria-invalid={$errors.deliveryAddress?.city ? 'true' : undefined}
 							autocomplete="address-level2"
@@ -400,7 +415,7 @@
 			<div role="region" aria-labelledby="additional-options-title">
 				<div class="space-y-4">
 					<div>
-						<label for="additionalComments" class="block text-sm font-medium text-gray-600 pt-4">
+						<label for="additionalComments" class="block pt-4 text-sm font-medium text-gray-600">
 							Additional Comments
 						</label>
 						<textarea
@@ -411,6 +426,7 @@
 								? 'border-red-500'
 								: ''}"
 							rows="4"
+							maxlength="500"
 							aria-label="Additional comments or special requests"
 							aria-invalid={$errors.additionalComments ? 'true' : undefined}
 							placeholder="Got special requests? Say so here and I'll be in touch :)"
@@ -454,9 +470,10 @@
 					</div>
 
 					<p class="mt-4 text-sm text-gray-500">
-						I try to respond and confirm bookings within a day or two. </p>
-            <p class="mt-4 text-sm text-gray-500">
-            Be sure to check your spam folder if you're expecting an email.
+						I try to respond and confirm bookings within a day or two.
+					</p>
+					<p class="mt-4 text-sm text-gray-500">
+						Be sure to check your spam folder if you're expecting an email.
 					</p>
 
 					<!-- Submit Button -->

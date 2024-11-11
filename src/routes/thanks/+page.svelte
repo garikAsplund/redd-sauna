@@ -7,7 +7,7 @@
 </script>
 
 <div 
-    class="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4 text-gray-800" 
+    class="flex min-h-[90vh] flex-col items-center justify-center bg-gray-100 p-4 text-gray-800" 
     role="main"
 >
 <div 

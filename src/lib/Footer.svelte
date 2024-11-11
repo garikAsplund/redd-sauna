@@ -1,4 +1,4 @@
-<footer class="flex w-full justify-center space-x-4 relative bottom-0 pb-8 mt-auto">
+<footer class="flex w-full justify-center space-x-4 relative bottom-0 py-8 mt-auto">
 	<p>reddsauna@gmail.com</p>
 	<span>|</span>
 	<p class="hidden md:block">(541) 626-6261</p>
