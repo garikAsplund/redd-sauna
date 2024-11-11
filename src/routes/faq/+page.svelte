@@ -23,7 +23,7 @@
 
 <!-- Regular FAQ Layout - Desktop Only -->
 <div class="hidden w-full flex-col items-center pb-24 pt-24 sm:flex md:pt-64">
-	<section class="w-[70%] space-y-12 text-black/80">
+	<section class="max-w-4xl space-y-12 text-black/80">
 		<h1 class="text-center text-4xl">Frequently Asked Questions</h1>
 
 		<div class="text-xl leading-loose">

@@ -3,7 +3,7 @@
 </svelte:head>
 
 <div class="flex w-full flex-col items-center pt-24 md:pt-64 pb-24">
-	<section class="w-[70%] space-y-12 text-black/80">
+	<section class="md:max-w-4xl w-[70%] space-y-12 text-black/80">
 		<h1 class="text-4xl text-center">The Redd Sauna Rundown</h1>
 		<p class="text-xl leading-loose">
 			I love the culture and invigorating feeling of a steamy sauna, but moving around kept me from
