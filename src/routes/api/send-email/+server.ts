@@ -69,8 +69,7 @@ export async function POST({ request }) {
             ${isGift ? '<p><strong>Gift:</strong> Yes</p>' : ''}
             ${additionalComments ? `<p><strong>Additional Comments:</strong> ${additionalComments}</p>`: ''}
 			</div>
-            <p>The total cost for your booking is <strong>$${totalCost.toFixed(2)}</strong>. Please make your payment via Venmo to <a href="https://venmo.com/reddsauna?txn=charge&amount=${totalCost}" target="_blank">@reddsauna</a>.</p>
-            <p>We appreciate your business and look forward to serving you. If you have any further questions, please don't hesitate to reach out by replying to this email or contacting me at (541) 626-6261.</p>
+<p>The total cost for your booking is <strong>$${totalCost.toFixed(2)}</strong>. Please make your payment via Venmo to <a href="https://venmo.com/reddsauna" target="_blank">@reddsauna</a>.</p>            <p>We appreciate your business and look forward to serving you. If you have any further questions, please don't hesitate to reach out by replying to this email or contacting me at (541) 626-6261.</p>
             <p>See you soon,<br>
             Pip</p>
         `
