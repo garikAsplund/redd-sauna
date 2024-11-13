@@ -46,10 +46,10 @@
 		>
 			<Logo />
 		</a>
-		<div class="flex items-center">
+		<div class="flex items-center space-x-4">
 			<a
 				href="/booking"
-				class="hidden p-2 lg:px-4 text-2xl md:block md:scale-75 lg:scale-100
+				class="hidden p-2 lg:px-4 lg:mx-2 text-2xl md:block md:scale-75 lg:scale-100
         {$page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
         {$page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
         {$page.url.pathname === '/booking' ? 'invisible' : ''}"
@@ -80,7 +80,7 @@
 				rel="noopener noreferrer"
 				target="_blank"
 				aria-label="Venmo"
-				class="scale-125 p-4 hover:opacity-75"
+				class="scale-125 p-4 md:p-2 hover:opacity-75"
 			>
 				<VenmoSVG />
 			</a>
@@ -88,7 +88,7 @@
 				href="https://www.instagram.com/reddsauna"
 				target="_blank"
 				rel="noopener"
-				class="scale-125 p-4 hover:opacity-75"
+				class="scale-125 p-4 md:p-2 hover:opacity-75"
 			>
 				<InstagramSVG />
 			</a>
