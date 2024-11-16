@@ -41,7 +41,7 @@
 		<a
 			href="/"
 			aria-label="Home"
-			class="translate-y-1/6 absolute left-1/2 mt-8 hidden -translate-x-1/2 transform hover:opacity-75 md:block md:scale-75 lg:scale-100"
+			class="translate-y-1/6 absolute left-1/2 mt-12 hidden -translate-x-1/2 transform hover:opacity-75 md:block md:scale-75 lg:scale-100"
 			aria-current={$page.url.pathname === '/' ? 'page' : undefined}
 		>
 			<Logo />
