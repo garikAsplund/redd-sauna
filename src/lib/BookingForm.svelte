@@ -488,7 +488,7 @@
 				<div class="space-y-4">
 					<div>
 						<label for="additionalComments" class="block pt-4 text-sm font-medium text-gray-600">
-							Additional Comments
+							Additional Comments (optional)
 						</label>
 						{#if $errors.additionalComments}
 							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
@@ -517,7 +517,6 @@
 							maxlength="500"
 							aria-label="Additional comments or special requests"
 							aria-invalid={$errors.additionalComments ? 'true' : undefined}
-							placeholder="Got special requests? Say so here and I'll be in touch :)"
 						></textarea>
 					</div>
 
