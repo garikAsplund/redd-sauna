@@ -24,15 +24,13 @@
 			$form.numberOfDays
 	);
 
-
 	async function handleSubmit(event) {
-		event.preventDefault();	
+		event.preventDefault();
 		const result = await validateForm();
 
 		if (result.valid) {
 			isSubmitting = true;
 			try {
-				
 			} catch (error) {
 				console.error('Error submitting form:', error);
 				isSubmitting = false;
@@ -69,9 +67,26 @@
 			<div class="grid grid-cols-1 gap-4">
 				<div>
 					<label for="firstName" class="block text-sm font-medium text-gray-600">
-						First Name <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						First Name
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.firstName}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.firstName}</p>
+					{/if}
 					<input
 						type="text"
 						id="firstName"
@@ -86,15 +101,29 @@
 						aria-invalid={$errors.firstName ? 'true' : undefined}
 						autocomplete="given-name"
 					/>
-					{#if $errors.firstName}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.firstName}</p>
-					{/if}
 				</div>
 				<div>
 					<label for="lastName" class="block text-sm font-medium text-gray-600">
-						Last Name <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Last Name
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.lastName}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.lastName}</p>
+					{/if}
 					<input
 						type="text"
 						id="lastName"
@@ -109,25 +138,35 @@
 						aria-invalid={$errors.lastName ? 'true' : undefined}
 						autocomplete="family-name"
 					/>
-					{#if $errors.lastName}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.lastName}</p>
-					{/if}
 				</div>
 			</div>
 		</div>
 
 		<!-- Contact Information Section -->
 		<div role="region" aria-labelledby="contact-info-title">
-			<!-- <h2 id="contact-info-title" class="mb-4 text-lg font-semibold text-gray-700">
-				Contact Information
-			</h2> -->
-
 			<div class="space-y-4">
 				<div>
 					<label for="email" class="block text-sm font-medium text-gray-600">
-						Email Address <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Email Address
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.email}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.email}</p>
+					{/if}
 					<input
 						type="email"
 						id="email"
@@ -142,15 +181,30 @@
 						aria-invalid={$errors.email ? 'true' : undefined}
 						autocomplete="email"
 					/>
-					{#if $errors.email}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.email}</p>
-					{/if}
 				</div>
 				<div>
 					<label for="phoneNumber" class="block text-sm font-medium text-gray-600">
-						Phone Number <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Phone Number
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.phoneNumber}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
+						<svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.phoneNumber}</p>
+					{/if}
 					<input
 						type="tel"
 						id="phoneNumber"
@@ -164,8 +218,6 @@
 						aria-invalid={$errors.phoneNumber ? 'true' : undefined}
 						autocomplete="tel"
 						pattern="^(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$"
-						placeholder="(123) 456-7890"
-						maxlength="15"
 						oninput={(e) => {
 							e.target.value = e.target.value.replace(/[^0-9().-\s]/g, '');
 							$form.phoneNumber = e.target.value;
@@ -177,55 +229,7 @@
 							$form.phoneNumber = formattedValue;
 						}}
 					/>
-					{#if $errors.phoneNumber}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.phoneNumber}</p>
-					{/if}
 				</div>
-
-				<!-- <fieldset class="mt-4">
-					<legend class="block text-sm font-medium text-gray-600">
-						Preferred Contact Method <span class="text-[#d33e27]" aria-hidden="true">*</span>
-						<span class="sr-only">required</span>
-					</legend>
-					<div class="mt-2 flex flex-col space-y-2 pl-4" role="radiogroup">
-						<label class="flex items-center">
-							<input
-								type="radio"
-								name="preferredContactMethod"
-								value="email"
-								bind:group={$form.preferredContactMethod}
-								id="contactMethodEmail"
-								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
-							/>
-							<span class="ml-2">Email</span>
-						</label>
-						<label class="flex items-center">
-							<input
-								type="radio"
-								name="preferredContactMethod"
-								value="call"
-								bind:group={$form.preferredContactMethod}
-								id="contactMethodCall"
-								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
-							/>
-							<span class="ml-2">Phone Call</span>
-						</label>
-						<label class="flex items-center">
-							<input
-								type="radio"
-								name="preferredContactMethod"
-								value="text"
-								bind:group={$form.preferredContactMethod}
-								id="contactMethodText"
-								class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
-							/>
-							<span class="ml-2">Text Message</span>
-						</label>
-					</div>
-					{#if $errors.preferredContactMethod}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.preferredContactMethod}</p>
-					{/if}
-				</fieldset> -->
 			</div>
 		</div>
 
@@ -238,9 +242,28 @@
 			<div class="space-y-4">
 				<div>
 					<label for="addressLine1" class="block text-sm font-medium text-gray-600">
-						Address Line 1 <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Address
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.deliveryAddress?.addressLine1}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
+							<svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.deliveryAddress.addressLine1}
+						</p>
+					{/if}
 					<input
 						type="text"
 						id="addressLine1"
@@ -256,19 +279,31 @@
 						aria-invalid={$errors.deliveryAddress?.addressLine1 ? 'true' : undefined}
 						autocomplete="address-line1"
 					/>
-					{#if $errors.deliveryAddress?.addressLine1}
-						<p class="mt-1 text-sm text-red-500" role="alert">
-							{$errors.deliveryAddress.addressLine1}
-						</p>
-					{/if}
 				</div>
 
 				<div class="grid grid-cols-1 gap-4 md:grid-cols-2">
 					<div>
 						<label for="city" class="block text-sm font-medium text-gray-600">
-							City <span class="text-[#d33e27]" aria-hidden="true">*</span>
+							City
 							<span class="sr-only">required</span>
 						</label>
+						{#if $errors.deliveryAddress?.city}
+							
+							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.deliveryAddress.city}</p>
+						{/if}
 						<input
 							type="text"
 							id="city"
@@ -284,14 +319,9 @@
 							aria-invalid={$errors.deliveryAddress?.city ? 'true' : undefined}
 							autocomplete="address-level2"
 						/>
-						{#if $errors.deliveryAddress?.city}
-							<p class="mt-1 text-sm text-red-500" role="alert">{$errors.deliveryAddress.city}</p>
-						{/if}
 					</div>
 					<div>
-						<label for="state" class="block text-sm font-medium text-gray-600">
-							State <span class="text-[#d33e27]" aria-hidden="true">*</span>
-						</label>
+						<label for="state" class="block text-sm font-medium text-gray-600"> State </label>
 						<input
 							type="text"
 							id="state"
@@ -308,9 +338,27 @@
 
 				<div>
 					<label for="zipCode" class="block text-sm font-medium text-gray-600">
-						ZIP Code <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						ZIP Code
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.deliveryAddress?.zipCode}
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.deliveryAddress.zipCode}
+						</p>
+					{/if}
 					<input
 						type="text"
 						id="zipCode"
@@ -338,9 +386,6 @@
 							$form.deliveryAddress.zipCode = numericValue;
 						}}
 					/>
-					{#if $errors.deliveryAddress?.zipCode}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.deliveryAddress.zipCode}</p>
-					{/if}
 				</div>
 			</div>
 		</div>
@@ -361,9 +406,26 @@
 					role="presentation"
 				>
 					<label for="deliveryDate" class="block cursor-pointer text-sm font-medium text-gray-600">
-						Delivery Date (a.m.) <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Delivery Date (a.m.)
 						<span class="sr-only">required</span>
 					</label>
+					{#if $errors.deliveryDate}
+						
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.deliveryDate}</p>
+					{/if}
 					<input
 						type="date"
 						id="deliveryDate"
@@ -377,16 +439,29 @@
 						aria-invalid={$errors.deliveryDate ? 'true' : undefined}
 						min={new Date().toISOString().split('T')[0]}
 					/>
-					{#if $errors.deliveryDate}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.deliveryDate}</p>
-					{/if}
 				</div>
 
 				<fieldset>
 					<legend class="block text-sm font-medium text-gray-600">
-						Number of Days <span class="text-[#d33e27]" aria-hidden="true">*</span>
+						Number of Days
 						<span class="sr-only">required</span>
 					</legend>
+					{#if $errors.numberOfDays}
+						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+							class="h-4 w-4"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+						>
+							<path
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+							/>
+						</svg>
+						{$errors.numberOfDays}</p>
+					{/if}
 					<div
 						class="mt-2 flex flex-col space-y-2 pl-4"
 						role="radiogroup"
@@ -406,9 +481,6 @@
 							</label>
 						{/each}
 					</div>
-					{#if $errors.numberOfDays}
-						<p class="mt-1 text-sm text-red-500" role="alert">{$errors.numberOfDays}</p>
-					{/if}
 				</fieldset>
 			</div>
 
@@ -418,6 +490,22 @@
 						<label for="additionalComments" class="block pt-4 text-sm font-medium text-gray-600">
 							Additional Comments
 						</label>
+						{#if $errors.additionalComments}
+							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.additionalComments}</p>
+						{/if}
 						<textarea
 							id="additionalComments"
 							name="additionalComments"
@@ -431,9 +519,6 @@
 							aria-invalid={$errors.additionalComments ? 'true' : undefined}
 							placeholder="Got special requests? Say so here and I'll be in touch :)"
 						></textarea>
-						{#if $errors.additionalComments}
-							<p class="mt-1 text-sm text-red-500" role="alert">{$errors.additionalComments}</p>
-						{/if}
 					</div>
 
 					<!-- Options -->
@@ -448,7 +533,20 @@
 						/>
 						<label for="isGift" class="text-sm font-medium text-gray-600">This is a gift</label>
 						{#if $errors.isGift}
-							<p class="mt-1 text-sm text-red-500" role="alert">{$errors.isGift}</p>
+							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.isGift}</p>
 						{/if}
 					</div>
 
@@ -465,7 +563,20 @@
 							>Sign up for news and updates</label
 						>
 						{#if $errors.subscribe}
-							<p class="mt-1 text-sm text-red-500" role="alert">{$errors.subscribe}</p>
+							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.subscribe}</p>
 						{/if}
 					</div>
 
