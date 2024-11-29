@@ -597,7 +597,7 @@
 						{/if}
 						<button
 							type="submit"
-							disabled={!isFormValid || isSubmitting}
+							disabled={isSubmitting}
 							class="mt-4 w-full {!isSubmitting
 								? 'bg-[#d33e27]'
 								: 'bg-gray-300'} rounded-md py-2 font-semibold text-white transition duration-300 hover:opacity-85 disabled:cursor-not-allowed"
