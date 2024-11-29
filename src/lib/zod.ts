@@ -92,6 +92,6 @@ export const schema = z.object({
 		.max(500, 'Additional comments must be 500 characters or less')
 		.optional(),
 	isGift: z.boolean().optional(),
-	numberOfDays: z.number().min(1, 'Please select at least one day').optional(),
+	numberOfDays: z.number().min(1, 'Please select at least one day').default(0),
 	subscribe: z.boolean().optional()
 });

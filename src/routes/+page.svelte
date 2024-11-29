@@ -34,7 +34,7 @@
 		alt="Redd Sauna"
 		class="absolute inset-0 z-20 h-full w-full object-cover object-right"
 	/>
-	<div class="absolute inset-0 z-20 bg-black/20"></div>
+	<div class="absolute inset-0 z-20 bg-black/5"></div>
 	<div
 		class="absolute inset-0 z-30 flex flex-col items-center justify-center space-y-16 translate-y-8 font-bold text-white"
 		style="opacity: {1 - scrollY / 300}"

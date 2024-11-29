@@ -7,14 +7,14 @@ import { redirect } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async () => {
 	const form = await superValidate(zod(schema));
-
+    form.data.deliveryDate = new Date().toISOString().split('T')[0];
 	return { form };
 };
 
 export const actions = {
 	default: async ({ request, fetch }) => {
 		const form = await superValidate(request, zod(schema));
-		console.log(form);
+		console.log({ form });
 
 		if (!form.valid) {
 			return fail(400, { form });

@@ -6,40 +6,26 @@
 
 	let { data } = $props();
 	let isSubmitting: boolean = $state(false);
-	const { form, errors, constraints, message, enhance, validateForm } = superForm(data.form, {
+  
+	const { form, errors, enhance, reset, constraints, message, validateForm } = superForm(
+	  data.form,
+	  {
 		validators: zod(schema),
-		schema,
-		dataType: 'json'
-	});
-	const isFormValid = $derived(
-		$form.firstName &&
-			$form.lastName &&
-			// $form.preferredContactMethod &&
-			$form.deliveryAddress.addressLine1 &&
-			$form.deliveryAddress.city &&
-			$form.deliveryAddress.zipCode &&
-			$form.email &&
-			$form.phoneNumber &&
-			$form.deliveryDate &&
-			$form.numberOfDays
-	);
-
-	async function handleSubmit(event) {
-		event.preventDefault();
-		const result = await validateForm();
-
-		if (result.valid) {
-			isSubmitting = true;
-			try {
-			} catch (error) {
-				console.error('Error submitting form:', error);
-				isSubmitting = false;
-			}
-		} else {
-			console.error('Form is not valid');
-			isSubmitting = false;
+		resetForm: false,
+		dataType: 'json',
+		taintedMessage: null,
+		onSubmit: () => {
+		  isSubmitting = true;
+		},
+		onResult: ({ result }) => {
+		  isSubmitting = false;
+		},
+		onError: ({ result }) => {
+		  isSubmitting = false;
+		  console.error('Form submission error:', result);
 		}
-	}
+	  }
+	);
 </script>
 
 <section
@@ -48,7 +34,7 @@
 >
 	<h1 id="booking-form-title" class="mb-6 text-2xl font-semibold text-gray-700">Booking Form</h1>
 
-	<SuperDebug data={$form} display={dev}></SuperDebug>
+	<!-- <SuperDebug data={$form} display={dev}></SuperDebug> -->
 
 	<form
 		method="POST"
@@ -56,7 +42,6 @@
 		class="w-full space-y-4"
 		aria-label="Reservation booking form"
 		novalidate
-		onsubmit={handleSubmit}
 	>
 		<!-- Personal Information Section -->
 		<div role="region" aria-labelledby="personal-info-title">
@@ -100,6 +85,7 @@
 						aria-required="true"
 						aria-invalid={$errors.firstName ? 'true' : undefined}
 						autocomplete="given-name"
+						{...$constraints.firstName}
 					/>
 				</div>
 				<div>
@@ -137,6 +123,7 @@
 						aria-required="true"
 						aria-invalid={$errors.lastName ? 'true' : undefined}
 						autocomplete="family-name"
+						{...$constraints.lastName}
 					/>
 				</div>
 			</div>
@@ -180,6 +167,7 @@
 						aria-required="true"
 						aria-invalid={$errors.email ? 'true' : undefined}
 						autocomplete="email"
+						{...$constraints.email}
 					/>
 				</div>
 				<div>
@@ -217,6 +205,7 @@
 						aria-required="true"
 						aria-invalid={$errors.phoneNumber ? 'true' : undefined}
 						autocomplete="tel"
+						{...$constraints.phoneNumber}
 						pattern="^(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}$"
 						oninput={(e) => {
 							e.target.value = e.target.value.replace(/[^0-9().-\s]/g, '');
@@ -278,6 +267,7 @@
 						aria-required="true"
 						aria-invalid={$errors.deliveryAddress?.addressLine1 ? 'true' : undefined}
 						autocomplete="address-line1"
+						{...$constraints.addressLine1}
 					/>
 				</div>
 
@@ -318,6 +308,7 @@
 							aria-required="true"
 							aria-invalid={$errors.deliveryAddress?.city ? 'true' : undefined}
 							autocomplete="address-level2"
+							{...$constraints.deliveryAddress?.city}
 						/>
 					</div>
 					<div>
@@ -372,9 +363,9 @@
 						aria-required="true"
 						aria-invalid={$errors.deliveryAddress?.zipCode ? 'true' : undefined}
 						autocomplete="postal-code"
+						{...$constraints.zipCode}
 						pattern="\d{5}"
 						inputmode="numeric"
-						maxlength="5"
 						oninput={(e) => {
 							e.target.value = e.target.value.replace(/\D/g, '');
 							$form.deliveryAddress.zipCode = e.target.value;
@@ -437,6 +428,7 @@
 						required
 						aria-required="true"
 						aria-invalid={$errors.deliveryDate ? 'true' : undefined}
+						{...$constraints.deliveryDate}
 						min={new Date().toISOString().split('T')[0]}
 					/>
 				</div>
@@ -475,6 +467,7 @@
 									name="numberOfDays"
 									value={day}
 									bind:group={$form.numberOfDays}
+									{...$constraints.numberOfDays}
 									class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
 								/>
 								<span class="ml-2">{day} {day === 1 ? 'day' : 'days'}</span>
@@ -509,6 +502,7 @@
 						<textarea
 							id="additionalComments"
 							name="additionalComments"
+							{...$constraints.additionalComments}
 							bind:value={$form.additionalComments}
 							class="mt-1 w-full rounded-md border border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 {$errors.additionalComments
 								? 'border-red-500'
@@ -526,6 +520,7 @@
 							type="checkbox"
 							id="isGift"
 							name="isGift"
+							{...$constraints.isGift}
 							bind:checked={$form.isGift}
 							class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
 							aria-invalid={$errors.isGift ? 'true' : undefined}
@@ -554,6 +549,7 @@
 							type="checkbox"
 							id="subscribe"
 							name="subscribe"
+							{...$constraints.subscribe}
 							bind:checked={$form.subscribe}
 							class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
 							aria-invalid={$errors.subscribe ? 'true' : undefined}
