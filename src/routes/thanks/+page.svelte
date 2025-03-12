@@ -1,9 +1,9 @@
 <script>
-    import { page } from '$app/stores';
+    import { page } from '$app/state';
     import { fly } from 'svelte/transition';
 
-    const name = $page.url.searchParams.get('name');
-    const email = $page.url.searchParams.get('email');
+    const name = page.url.searchParams.get('name');
+    const email = page.url.searchParams.get('email');
 </script>
 
 <div 
