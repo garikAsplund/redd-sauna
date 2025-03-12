@@ -13,7 +13,7 @@
 
 <svelte:window bind:scrollY />
 
-<main class="flex min-h-screen flex-col">
+<main class="flex min-h-screen flex-col w-full">
 	<Nav {scrollY} />
 
 	{@render children()}

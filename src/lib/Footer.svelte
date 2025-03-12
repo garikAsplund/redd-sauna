@@ -2,7 +2,7 @@
 	import Watermark from './Watermark.svelte';
 </script>
 
-<footer class="relative bottom-0 mt-auto flex w-full flex-col justify-center space-x-4 py-8">
+<footer class="relative bottom-0 mt-auto flex w-full flex-col justify-center py-8">
 	<div class="flex w-full justify-center space-x-4 py-8">
 		<p>reddsauna@gmail.com</p>
 		<span>|</span>

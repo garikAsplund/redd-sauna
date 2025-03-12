@@ -9,7 +9,7 @@
 </script>
 
 <nav
-	class="fixed top-0 z-40 w-full font-bold md:pb-20 {page.url.pathname === '/'
+	class="fixed top-0 z-40 w-full font-bold px-4 md:pb-20 {page.url.pathname === '/'
 		? 'text-white'
 		: 'bg-white text-black'}"
 	id="nav"
@@ -49,7 +49,7 @@
 		<div class="flex items-center md:space-x-4">
 			<a
 				href="/booking"
-				class="hidden p-2 lg:px-4 lg:mx-2 text-2xl md:block md:scale-75 lg:scale-100
+				class="hidden p-2 text-2xl md:block md:scale-75 lg:mx-2 lg:scale-100 lg:px-4
         {page.url.pathname === '/' && scrollY < 10 ? 'invisible' : ''}
         {page.url.pathname === '/' ? 'border-2 border-white' : 'border-2 border-[#d33e27]'}
         {page.url.pathname === '/booking' ? 'invisible' : ''}"
@@ -69,7 +69,7 @@
 			<a
 				href="/"
 				aria-label="Home"
-				class="block scale-110 md:scale-125 p-4 md:hidden"
+				class="block scale-110 p-4 md:hidden md:scale-125"
 				style={page.url.pathname === '/' ? `opacity: ${scrollY / 300}` : ``}
 				aria-current={page.url.pathname === '/' ? 'page' : undefined}
 			>
@@ -80,7 +80,7 @@
 				rel="noopener noreferrer"
 				target="_blank"
 				aria-label="Venmo"
-				class="scale-110 md:scale-125 p-4 md:p-2 hover:opacity-75"
+				class="scale-110 p-4 hover:opacity-75 md:scale-125 md:p-2"
 			>
 				<VenmoSVG />
 			</a>
@@ -88,7 +88,7 @@
 				href="https://www.instagram.com/reddsauna"
 				target="_blank"
 				rel="noopener"
-				class="scale-110 md:scale-125 p-4 md:p-2 hover:opacity-75"
+				class="scale-110 p-4 hover:opacity-75 md:scale-125 md:p-2"
 			>
 				<InstagramSVG />
 			</a>
