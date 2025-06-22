@@ -30,8 +30,8 @@ export async function POST({ request }) {
 
     // Email to the business
     const businessMailOptions = {
-        from: 'garik.asplund@gmail.com',
-        to: 'garik.asplund@gmail.com', // reddsauna@gmail.com
+        from: 'reddsauna@gmail.com',
+        to: 'reddsauna@gmail.com', // reddsauna@gmail.com
         subject: 'New Booking Request',
         html: `
             <h2>New Booking Request</h2>
@@ -52,8 +52,8 @@ export async function POST({ request }) {
 
     // Email to the customer
     const customerMailOptions = {
-        from: 'garik.asplund@gmail.com',
-        to: 'garik.asplund@gmail.com', // email
+        from: 'reddsauna@gmail.com',
+        to: email, // email
         subject: 'Your Redd Sauna Booking Confirmation',
         html: `
             <h2>Thank you for booking with us, ${firstName}!</h2>
