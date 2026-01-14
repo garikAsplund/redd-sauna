@@ -6,25 +6,25 @@
 
 	let { data } = $props();
 	let isSubmitting: boolean = $state(false);
-  
+
 	const { form, errors, enhance, reset, constraints, message, validateForm } = superForm(
-	  data.form,
-	  {
-		validators: zod(schema),
-		resetForm: false,
-		dataType: 'json',
-		taintedMessage: null,
-		onSubmit: () => {
-		  isSubmitting = true;
-		},
-		onResult: ({ result }) => {
-		  isSubmitting = false;
-		},
-		onError: ({ result }) => {
-		  isSubmitting = false;
-		  console.error('Form submission error:', result);
+		data.form,
+		{
+			validators: zod(schema),
+			resetForm: false,
+			dataType: 'json',
+			taintedMessage: null,
+			onSubmit: () => {
+				isSubmitting = true;
+			},
+			onResult: ({ result }) => {
+				isSubmitting = false;
+			},
+			onError: ({ result }) => {
+				isSubmitting = false;
+				console.error('Form submission error:', result);
+			}
 		}
-	  }
 	);
 </script>
 
@@ -56,21 +56,22 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.firstName}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.firstName}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.firstName}
+						</p>
 					{/if}
 					<input
 						type="text"
@@ -94,21 +95,22 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.lastName}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.lastName}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.lastName}
+						</p>
 					{/if}
 					<input
 						type="text"
@@ -138,21 +140,22 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.email}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.email}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.email}
+						</p>
 					{/if}
 					<input
 						type="email"
@@ -176,22 +179,22 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.phoneNumber}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
-						<svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.phoneNumber}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.phoneNumber}
+						</p>
 					{/if}
 					<input
 						type="tel"
@@ -219,6 +222,50 @@
 						}}
 					/>
 				</div>
+				<fieldset>
+					<legend class="block text-sm font-medium text-gray-600">
+						Preferred Contact Method
+						<span class="sr-only">required</span>
+					</legend>
+					{#if $errors.preferredContactMethod}
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.preferredContactMethod}
+						</p>
+					{/if}
+					<div
+						class="mt-2 flex flex-col space-y-2 pl-4"
+						role="radiogroup"
+						aria-invalid={$errors.preferredContactMethod ? 'true' : undefined}
+					>
+						{#each ['email', 'phone', 'text'] as method}
+							<label class="flex items-center">
+								<input
+									type="radio"
+									id="method-{method}"
+									name="preferredContactMethod"
+									value={method}
+									bind:group={$form.preferredContactMethod}
+									{...$constraints.preferredContactMethod}
+									class="rounded border-gray-300 text-blue-600 focus:ring-2 focus:ring-blue-400"
+								/>
+								<span class="ml-2 capitalize">{method}</span>
+							</label>
+						{/each}
+					</div>
+				</fieldset>
 			</div>
 		</div>
 
@@ -235,22 +282,21 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.deliveryAddress?.addressLine1}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
 							<svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.deliveryAddress.addressLine1}
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.deliveryAddress.addressLine1}
 						</p>
 					{/if}
 					<input
@@ -278,21 +324,22 @@
 							<span class="sr-only">required</span>
 						</label>
 						{#if $errors.deliveryAddress?.city}
-							
-							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-								/>
-							</svg>
-							{$errors.deliveryAddress.city}</p>
+							<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+								<svg
+									class="h-4 w-4"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+									/>
+								</svg>
+								{$errors.deliveryAddress.city}
+							</p>
 						{/if}
 						<input
 							type="text"
@@ -333,7 +380,7 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.deliveryAddress?.zipCode}
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert">
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
 							<svg
 								class="h-4 w-4"
 								viewBox="0 0 24 24"
@@ -401,21 +448,22 @@
 						<span class="sr-only">required</span>
 					</label>
 					{#if $errors.deliveryDate}
-						
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.deliveryDate}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.deliveryDate}
+						</p>
 					{/if}
 					<input
 						type="date"
@@ -439,20 +487,22 @@
 						<span class="sr-only">required</span>
 					</legend>
 					{#if $errors.numberOfDays}
-						<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-							class="h-4 w-4"
-							viewBox="0 0 24 24"
-							fill="none"
-							stroke="currentColor"
-							stroke-width="2"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-							/>
-						</svg>
-						{$errors.numberOfDays}</p>
+						<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+							<svg
+								class="h-4 w-4"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								stroke-width="2"
+							>
+								<path
+									stroke-linecap="round"
+									stroke-linejoin="round"
+									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+								/>
+							</svg>
+							{$errors.numberOfDays}
+						</p>
 					{/if}
 					<div
 						class="mt-2 flex flex-col space-y-2 pl-4"
@@ -475,6 +525,7 @@
 						{/each}
 					</div>
 				</fieldset>
+				
 			</div>
 
 			<div role="region" aria-labelledby="additional-options-title">
@@ -484,20 +535,22 @@
 							Additional Comments (optional)
 						</label>
 						{#if $errors.additionalComments}
-							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-								/>
-							</svg>
-							{$errors.additionalComments}</p>
+							<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+								<svg
+									class="h-4 w-4"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+									/>
+								</svg>
+								{$errors.additionalComments}
+							</p>
 						{/if}
 						<textarea
 							id="additionalComments"
@@ -527,20 +580,22 @@
 						/>
 						<label for="isGift" class="text-sm font-medium text-gray-600">This is a gift</label>
 						{#if $errors.isGift}
-							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-								/>
-							</svg>
-							{$errors.isGift}</p>
+							<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+								<svg
+									class="h-4 w-4"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+									/>
+								</svg>
+								{$errors.isGift}
+							</p>
 						{/if}
 					</div>
 
@@ -558,20 +613,22 @@
 							>Sign up for news and updates</label
 						>
 						{#if $errors.subscribe}
-							<p class="mt-1 text-sm text-red-500 flex items-end gap-1" role="alert"><svg
-								class="h-4 w-4"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-							>
-								<path
-									stroke-linecap="round"
-									stroke-linejoin="round"
-									d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-								/>
-							</svg>
-							{$errors.subscribe}</p>
+							<p class="mt-1 flex items-end gap-1 text-sm text-red-500" role="alert">
+								<svg
+									class="h-4 w-4"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									stroke-width="2"
+								>
+									<path
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+									/>
+								</svg>
+								{$errors.subscribe}
+							</p>
 						{/if}
 					</div>
 

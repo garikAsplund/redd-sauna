@@ -15,7 +15,7 @@ export async function POST({ request }) {
 	const {
 		firstName,
 		lastName,
-		// preferredContactMethod,
+		preferredContactMethod,
 		email,
 		phoneNumber,
 		deliveryDate,
@@ -38,6 +38,7 @@ export async function POST({ request }) {
             <p><strong>Name:</strong> ${firstName} ${lastName}</p>
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Phone:</strong> ${phoneNumber}</p>
+			<p><strong>Preferred Contact Method:</strong> ${preferredContactMethod.charAt(0).toUpperCase() + preferredContactMethod.slice(1)}</p>
             <p><strong>Delivery Date:</strong> ${new Date(deliveryDate).toLocaleDateString()}</p>
             <p><strong>Number of Days:</strong> ${numberOfDays}</p>
             <p><strong>Delivery Address:</strong></p>

@@ -42,6 +42,7 @@ export const schema = z.object({
 			{ message: 'Delivery date must be today or in the future' }
 		),
 	numberOfDays: z.number().min(1, 'Please select at least one day').default(0),
+	preferredContactMethod: z.enum(['email', 'phone', 'text']).default('email'),
 	deliveryAddress: z.object({
 		addressLine1: z
 			.string()
